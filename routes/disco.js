@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var Discogs = require('disconnect').Client;
 
 /* GET disconnect page. */
 router.get('/', function(req, res, next) {
-  res.render('disco', {
-    title: 'Disconnect',
-    author: '@bartve',
-    git: 'https://github.com/bartve/disconnect.git'
+  var db = new Discogs().database();
+  db.getRelease(176126, function(err, data){
+    res.send(data);
   });
 });
 
