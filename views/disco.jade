@@ -2,8 +2,15 @@ extends layout
 
 block content
   h1= title
-  h3 by #{author}
-  p
-    | link to
-    =" "
-    a(href="#{git}") repository
+  h3 by @#{author}
+  if releases
+    pre= releases
+  else if identity
+    pre= identity
+  else
+    p
+      | link to
+      =" "
+      a(href="#{git}") repository
+    pre= sessionDebug
+    a(href='/disco/authorize') Authorize App
