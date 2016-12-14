@@ -4,8 +4,8 @@ var Discogs = require('disconnect').Client;
 
 var dis = new Discogs(
   'Sample/0.1',
-  { consumerKey: 'PKYuNxmfwmpSCYYGFFLB' },
-  { consumerSecret: 'OiiUmZTzdfrQwDdyzDFkEADKNTcKFdTg' }
+  { consumerKey: 'tKJDUtRDoJpIDNsIQHCm' },
+  { consumerSecret: 'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW' }
 );
 
 var sess = {};
@@ -35,8 +35,8 @@ router.get('/', function(req, res, next) {
 router.get('/authorize', function(req, res, next) {
   var oAuth = new Discogs().oauth();
   oAuth.getRequestToken(
-    'PKYuNxmfwmpSCYYGFFLB',
-    'OiiUmZTzdfrQwDdyzDFkEADKNTcKFdTg',
+    'tKJDUtRDoJpIDNsIQHCm',
+    'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW',
     'http://local.dev:3000/disco/callback',
     function(err, requestData){
       // Persist "requestData" here so that the callback handler can
