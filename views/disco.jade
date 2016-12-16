@@ -4,13 +4,21 @@ block content
   h1= title
   h3 by @#{author}
   if releases
-    pre= releases
+    for release in releases
+      div
+        img(src=release.basic_information.thumb)
+        for artist in release.basic_information.artists
+          p=artist.name
+        else
+          p No artist
+    else
+      p No release
   else if identity
     pre= identity
   else
     p
-      | link to
+      |link to
       =" "
-      a(href="#{git}") repository
-    pre= sessionDebug
+      a(href=git) repository
+    pre=sessionDebug
     a(href='/disco/authorize') Authorize App

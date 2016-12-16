@@ -24,9 +24,9 @@ router.get('/', function(req, res, next) {
     var col = new Discogs(sess.dataAccessed).user().collection();
     col.getReleases(sess.username, 0, {page: 1, per_page: 75}, function(err, data){
       res.render('disco', {
-        title: 'Welcome to '+sess.username+'\'s Library',
+        title: 'Welcome to '+sess.username+'\'s Collection',
         author: 'maxperei',
-        releases: JSON.stringify(data.releases)
+        releases: data.releases
       });
     });
   }
@@ -72,6 +72,17 @@ router.get('/identity', function(req, res, next){
       identity: JSON.stringify(sess.identity)
     });
   });
+});
+
+router.get('/raw', function(req, res, next){
+  if(!sess.dataAccessed){
+    res.redirect('/disco/authorize');
+  }else{
+    var col = new Discogs(sess.dataAccessed).user().collection();
+    col.getReleases(sess.username, 0, {page: 1, per_page: 75}, function(err, data) {
+      res.jsonp(data);
+    });
+  }
 });
 
 router.get('/image', function(req, res, next) {
