@@ -37,7 +37,7 @@ router.get('/authorize', function(req, res, next) {
   oAuth.getRequestToken(
     'tKJDUtRDoJpIDNsIQHCm',
     'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW',
-    'http://local.dev:3000/disco/callback',
+    'http://localhost:3000/disco/callback',
     function(err, requestData){
       // Persist "requestData" here so that the callback handler can
       // access it later after returning from the authorize url
