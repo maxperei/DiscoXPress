@@ -11,4 +11,4 @@ export const headers = {
     'Accept': 'application/vnd.discogs.v2.plaintext+json',
     'userAgent': 'Sample/0.1'
 };
-//export const username : 'Dr_Manhattan';
+export const username = 'Dr_Manhattan';
