@@ -1,4 +1,3 @@
-//TODO api preloader
 import { Component } from '@angular/core';
 import { DiscogsApi } from "../services/discogs-api";
 
