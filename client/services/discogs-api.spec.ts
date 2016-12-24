@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { DiscogsApiService } from './discogs-api.service';
+import { DiscogsApi } from './discogs-api';
 
-describe('DiscogsApiService', () => {
+describe('DiscogsApi', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DiscogsApiService]
+      providers: [DiscogsApi]
     });
   });
 
-  it('should ...', inject([DiscogsApiService], (service: DiscogsApiService) => {
+  it('should ...', inject([DiscogsApi], (service: DiscogsApi) => {
     expect(service).toBeTruthy();
   }));
 });
