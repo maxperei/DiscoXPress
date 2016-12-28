@@ -2,15 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { DiscogsApi } from '../services/discogs-api'
+
+import { App } from './app.component';
+import { DiscogsApi } from '../services/discogs-api';
+import { Collection } from '../pages/collection/collection.component'
+
+const appRoutes : Routes = [
+  { path: 'collection', component: Collection }
+  // { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    App,
+    Collection
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     HttpModule
@@ -18,6 +28,6 @@ import { DiscogsApi } from '../services/discogs-api'
   providers: [
       DiscogsApi
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [App]
 })
 export class AppModule { }

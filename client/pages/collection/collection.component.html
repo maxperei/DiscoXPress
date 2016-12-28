@@ -1,0 +1,11 @@
+<div *ngIf="!library" [class.loader]="!isLoaded"></div>
+<main *ngIf="library">
+  <h1>{{library.title}}</h1>
+  <p>by @{{library.author}}</p>
+  <div *ngFor="let release of library.releases">
+    <img src="{{release.basic_information.thumb}}" />
+    <span *ngFor="let artist of release.basic_information.artists">
+      {{artist.name}}
+    </span>
+  </div>
+</main>
