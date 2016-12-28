@@ -4,7 +4,7 @@
   <nav>
     <ul>
       <li *ngFor="let p of pages">
-        <a routerLink="/collection" routerLinkActive="active">{{ p.title }}</a>
+        <a routerLink="/{{ p.title.toLowerCase() }}" routerLinkActive="active">{{ p.title }}</a>
       </li>
     </ul>
   </nav>
