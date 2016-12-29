@@ -15,7 +15,7 @@ import { Profile } from '../pages/profile/profile.component'
 const appRoutes : Routes = [
   { path: 'collection', component: Collection },
   { path: 'identity', component: Identity },
-  { path: 'profile', component: Profile },
+  { path: 'settings', component: Profile },
   { path: '**', component: PageNotFound }
 ];
 
