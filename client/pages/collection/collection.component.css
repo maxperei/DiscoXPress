@@ -1,0 +1,55 @@
+app-collection section{
+    margin: 0 auto;
+}
+.release__container{
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.release__item{
+    float: left;
+    height: 200px;
+}
+@media only screen and (min-width:1280px) {
+    .release__item{
+        width: 14%;
+    }
+}
+@media only screen and (max-width:1280px) {
+    .release__item{
+        width: 25%;
+    }
+}
+@media only screen and (max-width:1024px) {
+    .release__item{
+        width: 33.3%;
+    }
+}
+
+/*@media only screen and (max-width:960px) {
+}*/
+
+@media only screen and (max-width:768px) {
+    .release__item{
+        width: 50%;
+    }
+}
+
+/*@media only screen and (max-width:640px) {
+}*/
+
+@media only screen and (max-width:480px) {
+    .release__item{
+        width: 100%;
+    }
+}
+
+/*@media only screen and (max-width:320px) {
+}*/
+.release__item > img{
+    display: block;
+    margin: auto;
+}

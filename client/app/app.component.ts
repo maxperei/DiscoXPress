@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Collection } from "../pages/collection/collection.component";
+import { Collection } from '../pages/collection/collection.component';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +7,16 @@ import { Collection } from "../pages/collection/collection.component";
   styleUrls: ['./app.component.css']
 })
 export class App {
-
-  rootPage: any = Collection;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, link: string}>;
 
   constructor() {
-    // set our app's pages
+
     this.pages = [
-      {title: 'Search', component: Collection},
-      {title: 'Collection', component: Collection},
-      {title: 'Wantlist', component: Collection},
-      {title: 'Identity', component: Collection},
-      {title: 'Settings', component: Collection},
+      {title: 'Home', link: '/'},
+      {title: 'Collection', link: '/collection'},
+      {title: 'Wantlist', link: '/wantlist'},
+      {title: 'Identity', link: '/identity'},
+      {title: 'Settings', link: '/settings'},
     ];
   }
 }

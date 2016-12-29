@@ -1,11 +1,20 @@
-<div *ngIf="!library" [class.loader]="!isLoaded"></div>
-<main *ngIf="library">
-  <h1>{{library.title}}</h1>
-  <p>by @{{library.author}}</p>
-  <div *ngFor="let release of library.releases">
-    <img src="{{release.basic_information.thumb}}" />
-    <span *ngFor="let artist of release.basic_information.artists">
-      {{artist.name}}
-    </span>
-  </div>
-</main>
+<div *ngIf="!library">
+  <div [class.loader]="!isLoaded"></div>
+</div>
+<div *ngIf="library">
+  <p>
+    <strong>{{library.title}}</strong>
+    <br>
+    by @{{library.author}}
+  </p>
+  <section class="release__container">
+    <article *ngFor="let release of library.releases" class="release__item">
+      <img class="release__thumb" [src]="release.basic_information.thumb"/>
+      <br>
+      <span *ngFor="let artist of release.basic_information.artists">
+        {{artist.name}}
+      </span> • <span>{{ release.basic_information.title }}</span>
+    </article>
+    <div class="clearfix"></div>
+  </section>
+</div>

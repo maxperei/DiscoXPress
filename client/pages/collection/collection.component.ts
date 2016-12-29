@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscogsApi } from "../../services/discogs-api";
+import { Router } from '@angular/router';
+
+import { DiscogsApi } from '../../services/discogs-api';
+import { apiBase } from '../../../server/config';
 
 @Component({
   selector: 'app-collection',
@@ -9,12 +12,12 @@ import { DiscogsApi } from "../../services/discogs-api";
 export class Collection implements OnInit {
 
   public library;
-  constructor(public discogs: DiscogsApi){
+  private authorize: string = apiBase+'/authorize';
+  constructor(public discogs: DiscogsApi, private router: Router){
     discogs.loadDisco();
     discogs.libraryObs.subscribe(data => this.library = JSON.parse(window.localStorage['disco']));
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
