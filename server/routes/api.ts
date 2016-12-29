@@ -1,9 +1,9 @@
 import { Router, Response, Request } from 'express';
 const discogs = require('disconnect');
-import { headers, token, key } from "../config";
+import { apiBase, headers, token, key } from "../config";
 const session = require('express-session');
 
-const discoRouter: Router = Router();
+const apiRouter: Router = Router();
 const Discogs = discogs.Client;
 
 const dis = new Discogs(
@@ -14,14 +14,9 @@ const dis = new Discogs(
 
 var sess = { dataAccessed: '', dataRequested: '', username: '', identity: ''};
 
-discoRouter.get('/', function(request: Request, response: Response) {
+apiRouter.get('/', function(request: Request, response: Response) {
   if(!sess.dataAccessed) {
-    response.jsonp({
-      title: 'Disconnect',
-      author: 'bartve',
-      git: 'https://github.com/bartve/disconnect.git',
-      sessionDebug: JSON.stringify(session)
-    });
+    response.redirect(301, '/api/authorize');
   }else{
     var col = new Discogs(sess.dataAccessed).user().collection();
     col.getReleases(sess.username, 0, {page: 1, per_page: 75}, function(err, data){
@@ -34,12 +29,12 @@ discoRouter.get('/', function(request: Request, response: Response) {
   }
 });
 
-discoRouter.get('/authorize', function(request: Request, response: Response) {
+apiRouter.get('/authorize', function(request: Request, response: Response) {
   const oAuth = new Discogs().oauth();
   oAuth.getRequestToken(
     'tKJDUtRDoJpIDNsIQHCm',
     'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW',
-    'http://localhost:3000/disco/callback',
+    apiBase+'/callback',
     function(err, requestData){
       sess = session;
       sess.dataRequested = requestData;
@@ -48,19 +43,19 @@ discoRouter.get('/authorize', function(request: Request, response: Response) {
   );
 });
 
-discoRouter.get('/callback', function(request: Request, response: Response) {
+apiRouter.get('/callback', function(request: Request, response: Response) {
   const oAuth = new Discogs(sess.dataRequested).oauth();
   oAuth.getAccessToken(
     request.query.oauth_verifier,
     function(err, accessData){
       sess = session;
       sess.dataAccessed = accessData;
-      response.redirect('/disco/identity');
+      response.redirect('/api/identity');
     }
   );
 });
 
-discoRouter.get('/identity', function(request: Request, response: Response) {
+apiRouter.get('/identity', function(request: Request, response: Response) {
   const dis = new Discogs(sess.dataAccessed);
   dis.getIdentity(function(err, data){
     sess.identity = data;
@@ -68,23 +63,30 @@ discoRouter.get('/identity', function(request: Request, response: Response) {
     response.json({
       title: sess.username+'\'s Identity',
       author: 'maxperei',
-      identity: JSON.stringify(sess.identity)
+      identity: sess.identity
     });
   });
 });
 
-discoRouter.get('/raw', function(request: Request, response: Response) {
+apiRouter.get('/profile', function (request: Request, response: Response) {
+  var usr = new Discogs(sess.dataAccessed).user();
+  usr.getProfile(sess.username, function(err, data){
+    response.jsonp(data);
+  });
+});
+
+/*apiRouter.get('/raw', function(request: Request, response: Response) {
   if(!sess.dataAccessed){
-    response.redirect('/disco/authorize');
+    response.redirect('/api/authorize');
   }else{
     const col = new Discogs(sess.dataAccessed).user().collection();
     col.getReleases(sess.username, 0, {page: 1, per_page: 75}, function(err, data) {
       response.jsonp(data);
     });
   }
-});
+});*/
 
-discoRouter.get('/image', function(request: Request, response: Response) {
+/*apiRouter.get('/image', function(request: Request, response: Response) {
   const db = new Discogs(sess.dataAccessed).database();
   db.getRelease(176126, function(err, data){
     var url: string = data.images[0].resource_url;
@@ -92,6 +94,6 @@ discoRouter.get('/image', function(request: Request, response: Response) {
       response.send(data);
     });
   });
-});
+});*/
 
-export { discoRouter };
+export { apiRouter };

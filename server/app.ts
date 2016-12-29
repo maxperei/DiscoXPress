@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as cors from 'cors';
 import * as compression from 'compression';
 
-import { discoRouter } from "./routes/disco";
+import { apiRouter } from "./routes/api";
 
 const app: express.Application = express();
 
@@ -15,7 +15,7 @@ app.use(compression());
 app.use(urlencoded({ extended: true }));
 
 // app routes
-app.use('/disco', discoRouter);
+app.use('/api', apiRouter);
 
 if (app.get('env') === 'production') {
 
