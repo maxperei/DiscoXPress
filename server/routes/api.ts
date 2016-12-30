@@ -16,7 +16,9 @@ var sess = { dataAccessed: '', dataRequested: '', username: '', identity: ''};
 
 apiRouter.get('/', function(request: Request, response: Response) {
   if(!sess.dataAccessed) {
-    response.redirect(301, '/api/authorize');
+    // WTF ???
+    response.redirect('/api/authorize');
+    //response.json(sess);
   }else{
     var col = new Discogs(sess.dataAccessed).user().collection();
     col.getReleases(sess.username, 0, {page: 1, per_page: 75}, function(err, data){
@@ -74,6 +76,15 @@ apiRouter.get('/profile', function (request: Request, response: Response) {
     response.jsonp(data);
   });
 });
+
+apiRouter.get('/cougouyou', function(request: Request, response: Response) {
+  var inv = new Discogs(sess.dataAccessed).marketplace();
+  inv.getInventory('cougouyou_music', function(err, data){
+    response.jsonp({
+      inventory: data
+    });
+  });
+})
 
 /*apiRouter.get('/raw', function(request: Request, response: Response) {
   if(!sess.dataAccessed){

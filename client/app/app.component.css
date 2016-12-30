@@ -8,7 +8,7 @@ header.header{
     position: fixed;
     left: 0;
     top: 0;
-    width: 58px;
+    width: 174px;
     height: 100%;
     background: #111;
     z-index: 10;
@@ -21,7 +21,6 @@ header.header{
     height: 100%;
     letter-spacing: 0.075em;
 }
-
 .header nav .nav__content .nav__pages{
     position: absolute;
     left: 0;
@@ -31,9 +30,8 @@ header.header{
     font-size: 1rem;
     font-weight: bold;
 }
-
 main{
-    margin-left: 58px;
+    margin-left: 174px;
     min-height: 100%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

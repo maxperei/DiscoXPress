@@ -9,7 +9,9 @@
   </p>
   <section class="release__container">
     <article *ngFor="let release of library.releases" class="release__item">
-      <img class="release__thumb" [src]="release.basic_information.thumb"/>
+      <div class="img__wrapper toSquare">
+        <img class="release__thumb" [src]="release.basic_information.thumb"/>
+      </div>
       <br>
       <span *ngFor="let artist of release.basic_information.artists">
         {{artist.name}}

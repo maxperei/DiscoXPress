@@ -28,28 +28,42 @@ app-collection section{
         width: 33.3%;
     }
 }
-
 /*@media only screen and (max-width:960px) {
 }*/
-
 @media only screen and (max-width:768px) {
     .release__item{
         width: 50%;
     }
 }
-
 /*@media only screen and (max-width:640px) {
 }*/
-
 @media only screen and (max-width:480px) {
     .release__item{
         width: 100%;
     }
 }
-
 /*@media only screen and (max-width:320px) {
 }*/
-.release__item > img{
+.release__item img{
     display: block;
     margin: auto;
+}
+.img__wrapper{
+    width: 150px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+.toSquare{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.toSquare:hover{
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
