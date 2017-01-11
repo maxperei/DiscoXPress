@@ -11,6 +11,7 @@ import { PageNotFound } from '../pages/page-not-found/page-not-found.component';
 import { Profile } from '../pages/profile/profile.component'
 import { routing } from './app.routes';
 import { RootPage } from '../pages/root-page/root-page.component';
+import { CollectionDetail } from '../pages/collection/collection-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RootPage } from '../pages/root-page/root-page.component';
     Identity,
     PageNotFound,
     Profile,
-    RootPage
+    RootPage,
+    CollectionDetail
   ],
   imports: [
     routing,

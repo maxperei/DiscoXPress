@@ -14,6 +14,12 @@ app.use(json());
 app.use(compression());
 app.use(urlencoded({ extended: true }));
 
+app.use(function(request: express.Request, response: express.Response, next: express.NextFunction ){
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // app routes
 app.use('/api', apiRouter);
 

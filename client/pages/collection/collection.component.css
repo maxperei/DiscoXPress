@@ -12,6 +12,7 @@ app-collection section{
 .release__item{
     float: left;
     height: 200px;
+    cursor: pointer;
 }
 @media only screen and (min-width:1280px) {
     .release__item{

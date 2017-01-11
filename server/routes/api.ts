@@ -1,4 +1,4 @@
-import { Router, Response, Request } from 'express';
+import { Router, Response, Request, NextFunction } from 'express';
 const discogs = require('disconnect');
 import { apiBase, headers, token, key } from "../config";
 const session = require('express-session');
@@ -14,21 +14,12 @@ const dis = new Discogs(
 
 var sess = { dataAccessed: '', dataRequested: '', username: '', identity: ''};
 
-apiRouter.get('/', function(request: Request, response: Response) {
-  if(!sess.dataAccessed) {
-    // WTF ???
-    response.redirect('/api/authorize');
-    //response.json(sess);
-  }else{
-    var col = new Discogs(sess.dataAccessed).user().collection();
-    col.getReleases(sess.username, 0, {page: 1, per_page: 75}, function(err, data){
-      response.jsonp({
-        title: 'Welcome to '+sess.username+'\'s Collection',
-        author: 'maxperei',
-        releases: data.releases
-      });
-    });
-  }
+apiRouter.get('/releases/:id', function(request: Request, response: Response, next: NextFunction) {
+  var id = request.params.id;
+  var db = new Discogs(sess.dataAccessed).database();
+  db.getRelease(id, function(err, data){
+    response.jsonp(data);
+  });
 });
 
 apiRouter.get('/authorize', function(request: Request, response: Response) {
@@ -57,6 +48,7 @@ apiRouter.get('/callback', function(request: Request, response: Response) {
   );
 });
 
+
 apiRouter.get('/identity', function(request: Request, response: Response) {
   const dis = new Discogs(sess.dataAccessed);
   dis.getIdentity(function(err, data){
@@ -77,14 +69,39 @@ apiRouter.get('/profile', function (request: Request, response: Response) {
   });
 });
 
-apiRouter.get('/cougouyou', function(request: Request, response: Response) {
+apiRouter.get('/cougouyou/:page/:per_page', function(request: Request, response: Response) {
+  var page = request.params.page, per_page = request.params.per_page;
   var inv = new Discogs(sess.dataAccessed).marketplace();
-  inv.getInventory('cougouyou_music', function(err, data){
+  inv.getInventory('cougouyou_music', { page: page, per_page: per_page}, function(err, data){
     response.jsonp({
       inventory: data
     });
   });
-})
+});
+
+apiRouter.get('/release', function(request: Request, response: Response) {
+  var id = 7017407;
+  var db = new Discogs().database();
+  db.getRelease(id, function(err, data){
+    response.send(data);
+  });
+});
+
+apiRouter.get('/:page/:per_page', function(request: Request, response: Response) {
+  if(!sess.dataAccessed) {
+    response.redirect('/api/authorize');
+  }else{
+    var page = request.params.page, per_page = request.params.per_page;
+    var col = new Discogs(sess.dataAccessed).user().collection();
+    col.getReleases(sess.username, 0, {page: page, per_page: per_page}, function(err, data){
+      response.jsonp({
+        title: 'Welcome to '+sess.username+'\'s Collection',
+        author: 'maxperei',
+        releases: data
+      });
+    });
+  }
+});
 
 /*apiRouter.get('/raw', function(request: Request, response: Response) {
   if(!sess.dataAccessed){

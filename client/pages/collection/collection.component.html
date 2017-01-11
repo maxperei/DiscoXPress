@@ -8,7 +8,7 @@
     by @{{library.author}}
   </p>
   <section class="release__container">
-    <article *ngFor="let release of library.releases" class="release__item">
+    <article *ngFor="let release of library.releases.releases" class="release__item" (click)="getDetail(release.id);">
       <div class="img__wrapper toSquare">
         <img class="release__thumb" [src]="release.basic_information.thumb"/>
       </div>
