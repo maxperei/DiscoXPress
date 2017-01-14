@@ -55,6 +55,22 @@ app-collection section{
     overflow: hidden;
     position: relative;
 }
+.pagination{
+    margin-bottom: 1em;
+}
+.pagination .pages{
+    padding: 0;
+    float: left;
+}
+.pagination .pages li{
+    font-family: 'Cousine', monospace;
+    cursor: pointer;
+    padding: 1em;
+    display: inline-block;
+}
+.pagination .per_pages{
+    float: right;
+}
 .toSquare{
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;

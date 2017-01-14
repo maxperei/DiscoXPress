@@ -17,7 +17,6 @@ export class CollectionDetail implements OnInit {
   artists: any;
   country: any;
   videos: any;
-  uri : string = 'http://youtube.com/embed/V5s-KLGVcTI';
   constructor(public discogs: DiscogsApi, private route: ActivatedRoute){
       this.sub = this.route.params.subscribe(
           (params: any) => {
