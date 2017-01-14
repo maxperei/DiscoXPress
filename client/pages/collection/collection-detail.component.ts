@@ -7,14 +7,17 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './collection-detail.component.html',
   styleUrls: ['./collection-detail.component.css']
 })
+
 export class CollectionDetail implements OnInit {
   private sub: any;
   private call: any;
   ref: any;
-  status : any;
-  title : any;
-  artists : any;
-  country : any;
+  status: any;
+  title: any;
+  artists: any;
+  country: any;
+  videos: any;
+  uri : string = 'http://youtube.com/embed/V5s-KLGVcTI';
   constructor(public discogs: DiscogsApi, private route: ActivatedRoute){
       this.sub = this.route.params.subscribe(
           (params: any) => {
@@ -27,6 +30,7 @@ export class CollectionDetail implements OnInit {
                       this.title = this.ref.title;
                       this.artists = this.ref.artists;
                       this.country = this.ref.country;
+                      this.videos = this.ref.videos;
                   }
               );
           }

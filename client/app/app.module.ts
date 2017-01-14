@@ -12,6 +12,7 @@ import { Profile } from '../pages/profile/profile.component'
 import { routing } from './app.routes';
 import { RootPage } from '../pages/root-page/root-page.component';
 import { CollectionDetail } from '../pages/collection/collection-detail.component';
+import { SafePipe } from '../pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CollectionDetail } from '../pages/collection/collection-detail.componen
     PageNotFound,
     Profile,
     RootPage,
-    CollectionDetail
+    CollectionDetail,
+    SafePipe
   ],
   imports: [
     routing,
