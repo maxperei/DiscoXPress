@@ -1,0 +1,6 @@
+<main>
+    <pre>{{ title }}</pre>
+    <pre *ngFor="let artist of artists">{{ artist.name }}</pre>
+    <pre>{{ country }}</pre>
+    <iframe *ngFor="let video of videos" class="player" frameborder="0" [src]="'http://youtube.com/embed/'+video.uri.split('v=')[1] | safe" webkitallowfullscreen mozallowfullscreen allowfullscreen> </iframe>
+</main>

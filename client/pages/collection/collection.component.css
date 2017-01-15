@@ -59,13 +59,14 @@ app-collection section{
     margin-bottom: 1em;
 }
 .pagination .pages{
+    margin: 0;
     padding: 0;
     float: left;
 }
 .pagination .pages li{
     font-family: 'Cousine', monospace;
     cursor: pointer;
-    padding: 1em;
+    padding: 0 1em 1em 1em;
     display: inline-block;
 }
 .pagination .per_pages{

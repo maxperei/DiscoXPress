@@ -3,9 +3,6 @@
 </div>
 <div *ngIf="library">
   <p>
-    <!--<strong>{{ library.title }}</strong>
-    <br>
-    by @{{ library.author }}-->
     <div class="pagination">
       <ul class="pages">
         <li *ngFor="let p of createRange(pages)" (click)="pagination(p, pP)">
@@ -18,7 +15,7 @@
         </option>
       </select>
     </div>
-  <div class="clearfix"></div>
+  <hr class="clearfix">
   <section class="release__container">
     <article *ngFor="let release of library.releases.releases" class="release__item" (click)="getDetail(release.id);">
       <div class="img__wrapper toSquare">

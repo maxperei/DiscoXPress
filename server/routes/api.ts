@@ -79,6 +79,16 @@ apiRouter.get('/cougouyou/:page/:per_page', function(request: Request, response:
   });
 });
 
+apiRouter.get('/owner/:page/:per_page', function(request: Request, response: Response) {
+  var page = request.params.page, per_page = request.params.per_page;
+  var inv = new Discogs(sess.dataAccessed).marketplace();
+  inv.getInventory(sess.username, { page: page, per_page: per_page}, function(err, data){
+    response.jsonp({
+      inventory: data
+    });
+  });
+});
+
 apiRouter.get('/release', function(request: Request, response: Response) {
   var id = 7017407;
   var db = new Discogs().database();

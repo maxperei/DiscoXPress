@@ -12,6 +12,7 @@ import { Profile } from '../pages/profile/profile.component'
 import { routing } from './app.routes';
 import { RootPage } from '../pages/root-page/root-page.component';
 import { CollectionDetail } from '../pages/collection/collection-detail.component';
+import { ListingDetail } from "../pages/listing/listing-detail.component";
 import { SafePipe } from '../pipes/safe.pipe';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SafePipe } from '../pipes/safe.pipe';
     Profile,
     RootPage,
     CollectionDetail,
+    ListingDetail,
     SafePipe
   ],
   imports: [
@@ -32,7 +34,7 @@ import { SafePipe } from '../pipes/safe.pipe';
     HttpModule
   ],
   providers: [
-      DiscogsApi
+    DiscogsApi
   ],
   bootstrap: [App]
 })
