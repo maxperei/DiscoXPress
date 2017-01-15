@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { DiscogsApi } from '../../services/discogs-api';
 import { apiBase } from '../../../server/config';
-import {isUndefined} from "util";
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-collection',
@@ -18,13 +18,13 @@ export class Collection implements OnInit {
   model = { pP: null };
   choice: number[] = [50, 75, 100];
   constructor(public discogs: DiscogsApi, private router: Router){
-    this.model.pP = this.choice[0];
+    this.model.pP = this.choice[1];
     discogs.loadDisco(1, this.model.pP);
     discogs.libraryObs.subscribe(
-        (data) => {
-          this.library = JSON.parse(window.localStorage['disco']);
-          this.pages = this.library.releases.pagination.pages;
-        }
+      (data) => {
+        this.library = JSON.parse(window.localStorage['disco']);
+        this.pages = this.library.releases.pagination.pages;
+      }
     );
   }
 

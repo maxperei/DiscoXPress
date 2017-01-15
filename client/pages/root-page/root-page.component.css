@@ -1,0 +1,30 @@
+.pagination{
+    margin-bottom: 1em;
+}
+.pagination .pages{
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+.pagination .pages li{
+    font-family: 'Cousine', monospace;
+    cursor: pointer;
+    padding: 0 1em 1em 1em;
+    display: inline-block;
+}
+.pagination .per_pages{
+    float: right;
+}
+.total{
+    font-family: 'Cousine', monospace;
+    float: right;
+}
+.listing__item{
+    margin: 1em 0;
+}
+.listing__item span{
+    float: right;
+}
+.line-through{
+    text-decoration: line-through;
+}

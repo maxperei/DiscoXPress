@@ -3,12 +3,12 @@ import { DiscogsApi } from "../../services/discogs-api";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-collection-detail',
-  templateUrl: './collection-detail.component.html',
-  styleUrls: ['./collection-detail.component.css']
+  selector: 'app-listing-detail',
+  templateUrl: './listing-detail.component.html',
+  styleUrls: ['./listing-detail.component.css']
 })
 
-export class CollectionDetail implements OnInit {
+export class ListingDetail implements OnInit {
   private sub: any;
   private call: any;
   ref: any;
