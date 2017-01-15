@@ -31,7 +31,7 @@ export class Collection implements OnInit {
   ngOnInit() { }
 
   getDetail(id){
-    this.router.navigate(['./col/'+id]);
+    this.router.navigate(['./rel/'+id]);
   }
 
   createRange(number){

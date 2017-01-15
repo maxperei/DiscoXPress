@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { Collection } from './collection.component';
-import { CollectionDetail } from "./collection-detail.component";
+import { ReleaseDetail } from "../release/release-detail.component";
 
 export const collectionRoutes: Routes = [
     { path: 'collection', component: Collection },
-    { path: 'col/:id', component: CollectionDetail }
+    { path: 'rel/:id', component: ReleaseDetail }
 ];

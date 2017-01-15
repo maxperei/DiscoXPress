@@ -11,8 +11,7 @@ import { PageNotFound } from '../pages/page-not-found/page-not-found.component';
 import { Profile } from '../pages/profile/profile.component'
 import { routing } from './app.routes';
 import { RootPage } from '../pages/root-page/root-page.component';
-import { CollectionDetail } from '../pages/collection/collection-detail.component';
-import { ListingDetail } from "../pages/listing/listing-detail.component";
+import { ReleaseDetail } from "../pages/release/release-detail.component";
 import { SafePipe } from '../pipes/safe.pipe';
 
 @NgModule({
@@ -23,8 +22,7 @@ import { SafePipe } from '../pipes/safe.pipe';
     PageNotFound,
     Profile,
     RootPage,
-    CollectionDetail,
-    ListingDetail,
+    ReleaseDetail,
     SafePipe
   ],
   imports: [

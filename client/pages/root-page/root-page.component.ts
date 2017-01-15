@@ -43,6 +43,6 @@ export class RootPage implements OnInit {
   }
 
   getDetail(id){
-    this.router.navigate(['./col/'+id]);
+    this.router.navigate(['./rel/'+id]);
   }
 }

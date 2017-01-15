@@ -3,15 +3,16 @@ import { DiscogsApi } from "../../services/discogs-api";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-listing-detail',
-  templateUrl: './listing-detail.component.html',
-  styleUrls: ['./listing-detail.component.css']
+  selector: 'app-release-detail',
+  templateUrl: './release-detail.component.html',
+  styleUrls: ['./release-detail.component.css']
 })
 
-export class ListingDetail implements OnInit {
+export class ReleaseDetail implements OnInit {
   private sub: any;
   private call: any;
   ref: any;
+  artw: any;
   status: any;
   title: any;
   artists: any;
@@ -25,6 +26,7 @@ export class ListingDetail implements OnInit {
               this.call = this.discogs.releaseObs.subscribe(
                   (data) => {
                       this.ref = data;
+                      this.artw = this.ref.images;
                       this.status = this.ref.status;
                       this.title = this.ref.title;
                       this.artists = this.ref.artists;

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { RootPage } from './root-page.component';
-import { ListingDetail } from "../listing/listing-detail.component";
+import { ReleaseDetail } from "../release/release-detail.component";
 
 export const rootRoutes: Routes = [
     { path: '', component: RootPage },
-    { path: 'rel/:id', component: ListingDetail }
+    { path: 'rel/:id', component: ReleaseDetail }
 ];

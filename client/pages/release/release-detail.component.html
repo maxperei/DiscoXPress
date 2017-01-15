@@ -1,4 +1,7 @@
 <main>
+    <div *ngFor="let imgPpty of artw">
+        <img [src]="imgPpty.uri" [width]="imgPpty.width" [height]="imgPpty.height" />
+    </div>
     <pre>{{ title }}</pre>
     <pre *ngFor="let artist of artists">{{ artist.name }}</pre>
     <pre>{{ country }}</pre>
