@@ -7,11 +7,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DiscogsApi {
   data: any;
-  library: Object = {};
+  library: Object = {'releases': {'releases': [] }};
   identity: Object = {};
   release: Object = {};
   inventory: Object = {};
   cache: Array<any> = [];
+  cacheCol: Array<any> = [];
   libraryObs = new Subject<string>();
   identityObs = new Subject<string>();
   releaseObs = new Subject<string>();
@@ -22,14 +23,20 @@ export class DiscogsApi {
     this.data = null;
   }
 
-  loadDisco(page, per_page){
-    this.http.get(apiBase+`/${page}/${per_page}`).map(res => res.json()).subscribe(
-      (data) => {
-        this.library = data;
-        window.localStorage['disco'] = JSON.stringify(this.library);
-        this.libraryObs.next(data);
-      }
-    );
+  loadDisco(page, per_page) {
+    if (this.isInColCache(page, per_page)) {
+      this.library = this.cacheCol[page][per_page];
+      this.libraryObs.next(this.cacheCol[page][per_page]);
+    } else {
+      this.http.get(apiBase + `/${page}/${per_page}`).map(res => res.json()).subscribe(
+        (data) => {
+          this.library = data;
+          if(!this.cacheCol[page]) {this.cacheCol[page]= [] }
+          this.cacheCol[page][per_page] = data;
+          this.libraryObs.next(data);
+        }
+      );
+    }
   }
 
   loadIdentity(){
@@ -60,6 +67,10 @@ export class DiscogsApi {
         this.invObs.next(data);
       }
     )
+  }
+
+  isInColCache(p, pP){
+    return this.cacheCol[p]!= undefined  ? this.cacheCol[p][pP] != undefined : false ;
   }
 
   isInCache(id){

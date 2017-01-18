@@ -4,5 +4,6 @@ import { ReleaseDetail } from "../release/release-detail.component";
 
 export const collectionRoutes: Routes = [
     { path: 'collection', component: Collection },
+    { path: 'collection/:p/:pp', component: Collection },
     { path: 'rel/:id', component: ReleaseDetail }
 ];

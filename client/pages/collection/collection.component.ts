@@ -22,7 +22,7 @@ export class Collection implements OnInit {
     discogs.loadDisco(1, this.model.pP);
     discogs.libraryObs.subscribe(
       (data) => {
-        this.library = JSON.parse(window.localStorage['disco']);
+        this.library = data;
         this.pages = this.library.releases.pagination.pages;
       }
     );
@@ -47,5 +47,6 @@ export class Collection implements OnInit {
       pP = this.model.pP;
     }
     this.discogs.loadDisco(p, pP);
+    this.router.navigate([`./collection/${p}/${pP}`]);
   }
 }
