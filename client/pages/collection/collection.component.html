@@ -5,7 +5,7 @@
   <p>
     <div class="pagination">
       <ul class="pages">
-        <li *ngFor="let p of createRange(pages)" (click)="pagination(p, pP)">
+        <li *ngFor="let p of createRange(discogs.library.releases.pagination.pages)" (click)="pagination(p, pP)">
           {{ p }}
         </li>
       </ul>
@@ -17,7 +17,7 @@
     </div>
   <hr class="clearfix">
   <section class="release__container">
-    <article *ngFor="let release of library.releases.releases" class="release__item" (click)="getDetail(release.id);">
+    <article *ngFor="let release of discogs.library.releases.releases" class="release__item" (click)="getDetail(release.id);">
       <div class="img__wrapper toSquare">
         <img class="release__thumb" [src]="release.basic_information.thumb"/>
       </div>
