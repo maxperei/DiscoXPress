@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DiscogsApi {
   data: any;
-  library: Object = {'releases': {'releases': [], 'pagination': { 'pages' : 0 } }};
+  library: Object = { 'releases': { 'releases': [], 'pagination': { 'pages' : 0 } } };
   identity: Object = {};
   release: Object = {};
   inventory: Object = {};
@@ -26,14 +26,12 @@ export class DiscogsApi {
   loadDisco(page, per_page) {
     if (this.isInColCache(page, per_page)) {
       this.library = this.cacheCol[page][per_page];
-      // this.libraryObs.next(this.cacheCol[page][per_page]);
     } else {
       this.http.get(apiBase + `/${page}/${per_page}`).map(res => res.json()).subscribe(
         (data) => {
           this.library = data;
           if(!this.cacheCol[page]) {this.cacheCol[page]= [] }
           this.cacheCol[page][per_page] = data;
-          // this.libraryObs.next(data);
         }
       );
     }
@@ -70,7 +68,7 @@ export class DiscogsApi {
   }
 
   isInColCache(p, pP){
-    return this.cacheCol[p]!= undefined  ? this.cacheCol[p][pP] != undefined : false ;
+    return this.cacheCol[p]!= undefined ? this.cacheCol[p][pP] != undefined : false ;
   }
 
   isInCache(id){
