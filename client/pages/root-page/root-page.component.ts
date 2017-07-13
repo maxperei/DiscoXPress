@@ -16,18 +16,17 @@ export class RootPage implements OnInit {
   model = { pP: null };
   choice: number[] = [50, 75, 100];
   constructor(public discogs: DiscogsApi, public router: Router) {
-
     this.model.pP = this.choice[1];
     discogs.ownerInventory(1, this.model.pP);
     discogs.invObs.subscribe(
       (data) => {
         this.inventory = JSON.parse(window.localStorage['inv']);
-        this.message = this.inventory.inventory.message;
-        this.listings = this.inventory.inventory.listings;
-        if(this.message != 'Missing user-agent'){
-          this.pages = this.inventory.inventory.pagination.pages;
-        } else {
+        this.message = this.inventory.message;
+        if(this.message){
           router.navigate(['./login'])
+        } else {
+          this.listings = this.inventory.listings;
+          this.pages = this.inventory.pagination.pages;
         }
       }
     );

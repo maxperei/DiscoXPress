@@ -15,10 +15,10 @@
     </select>
   </div>
   <div class="clearfix"></div>
-  <div class="total">Total : {{ inventory.inventory.pagination.items }}</div>
+  <div class="total">Total : {{ inventory.pagination.items }}</div>
   <hr class="clearfix" />
   <section class="release__container">
-    <article *ngFor="let listing of inventory.inventory.listings" class="release__item">
+    <article *ngFor="let listing of inventory.listings" class="release__item">
       <div *ngIf="listing.status == 'Sold'">
         <div class="listing__item line-through">{{ listing.release.description }}<span>{{ listing.price.value }} {{ listing.price.currency }}</span></div>
       </div>

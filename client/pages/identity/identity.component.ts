@@ -16,9 +16,13 @@ export class Identity implements OnInit {
     discogs.identityObs.subscribe(
         (data) => {
           this.identity = JSON.parse(window.localStorage['identity']);
+          if (this.identity.message) {
+            router.navigate(['./login']);
+            /* TODO FlashMessage */
+          }
         }
     );
   }
 
-  ngOnInit() { }
+  ngOnInit() {  }
 }

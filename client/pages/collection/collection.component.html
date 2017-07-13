@@ -2,19 +2,18 @@
   <div [class.loader]="!isLoaded"></div>
 </div>
 <div *ngIf="library">
-  <p>
-    <div class="pagination">
-      <ul class="pages">
-        <li *ngFor="let p of createRange(discogs.library.releases.pagination.pages)" (click)="pagination(p, pP)">
-          {{ p }}
-        </li>
-      </ul>
-      <select class="per_pages" required [(ngModel)]="model.pP" (change)="pagination(1, model.pP)">
-        <option *ngFor="let pP of choice" [value]="pP">
-          {{ pP }}
-        </option>
-      </select>
-    </div>
+  <div class="pagination">
+    <ul class="pages">
+      <li *ngFor="let p of createRange(discogs.library.releases.pagination.pages)" (click)="pagination(p, pP)">
+        {{ p }}
+      </li>
+    </ul>
+    <select class="per_pages" required [(ngModel)]="model.pP" (change)="pagination(1, model.pP)">
+      <option *ngFor="let pP of choice" [value]="pP">
+        {{ pP }}
+      </option>
+    </select>
+  </div>
   <hr class="clearfix">
   <section class="release__container">
     <article *ngFor="let release of discogs.library.releases.releases" class="release__item" (click)="getDetail(release.id);">

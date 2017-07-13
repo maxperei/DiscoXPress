@@ -33,6 +33,12 @@ export class Collection implements OnInit {
     discogs.libraryObs.subscribe(
       (data) => {
         this.library = data;
+        if (this.library.message) {
+          router.navigate(['./login']);
+          /* TODO FlashMessage */
+        } else {
+
+        }
         //this.pages = this.library.releases.pagination.pages;
       }
     );
