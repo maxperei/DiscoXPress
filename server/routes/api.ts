@@ -43,7 +43,7 @@ apiRouter.get('/callback', function(request: Request, response: Response) {
     function(err, accessData){
       sess = session;
       sess.dataAccessed = accessData;
-      response.redirect('/api/identity');
+      response.redirect('http://localhost:4200/identity');
     }
   );
 });
@@ -57,7 +57,7 @@ apiRouter.get('/identity', function(request: Request, response: Response) {
     response.json({
       title: sess.username+'\'s Identity',
       author: 'maxperei',
-      identity: sess.identity
+      session: sess.identity
     });
   });
 });
