@@ -24,17 +24,24 @@ export class DiscogsApi {
   }
 
   loadDisco(page, per_page) {
-    if (this.isInColCache(page, per_page)) {
+    /*if (this.isInColCache(page, per_page)) {
       this.library = this.cacheCol[page][per_page];
-    } else {
+      console.log('in cache');
+      this.libraryObs.subscribe(
+          (data) => {
+            this.libraryObs.next(data);
+          }
+      )
+    } else {*/
       this.http.get(apiBase + `/${page}/${per_page}`).map(res => res.json()).subscribe(
         (data) => {
           this.library = data;
-          if(!this.cacheCol[page]) {this.cacheCol[page]= [] }
+          if (!this.cacheCol[page]) { this.cacheCol[page]= [] }
           this.cacheCol[page][per_page] = data;
+          this.libraryObs.next(data);
         }
       );
-    }
+    /*}*/
   }
 
   loadIdentity(){
@@ -68,7 +75,7 @@ export class DiscogsApi {
   }
 
   isInColCache(p, pP){
-    return this.cacheCol[p]!= undefined ? this.cacheCol[p][pP] != undefined : false ;
+    return this.cacheCol[p] != undefined ? this.cacheCol[p][pP] != undefined : false ;
   }
 
   isInCache(id){
@@ -76,9 +83,9 @@ export class DiscogsApi {
   }
 
   findRelById(id){
-    if(this.isInCache(id)){
+    if (this.isInCache(id)) {
       this.releaseObs.next(this.cache[id]);
-    }else{
+    } else {
       this.http.get(apiBase+'/releases/'+id).map(res => res.json()).subscribe(
         (data) => {
           this.release = data;
@@ -88,7 +95,4 @@ export class DiscogsApi {
       )
     }
   }
-
-
-
 }

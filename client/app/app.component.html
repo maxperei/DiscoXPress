@@ -1,16 +1,15 @@
 <header class="header">
   <nav role="navigation">
     <div class="nav__content">
-      <h1>
-        <a [routerLink]="['/']">
-          <span class="logo_section">
-            <img src="" alt="Disco Express" width="150" height="61">
-          </span>
+      <h1 class="logo">
+        <a [routerLink]="['/identity']">
+          <span class="ico__img"><img src="../assets/img/discogs_logo_white.svg" alt="DiscoXPress"></span><!--
+          --><span class="ico__txt">XPress</span>
         </a>
       </h1>
       <ul class="nav__pages">
         <li *ngFor="let p of pages">
-          <a routerLink="{{ p.link }}" routerLinkActive="active">{{ p.title }}</a>
+          <a routerLink="{{ p.link }}">{{ p.title }}</a>
         </li>
       </ul>
     </div>

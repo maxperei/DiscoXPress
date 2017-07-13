@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { DiscogsApi } from '../../services/discogs-api';
 import { apiBase } from '../../../server/config';
@@ -17,19 +17,28 @@ export class Collection implements OnInit {
   pages: any;
   model = { pP: null };
   choice: number[] = [50, 75, 100];
-  constructor(public discogs: DiscogsApi, private router: Router){
-    this.model.pP = this.choice[1];
-    discogs.loadDisco(1, this.model.pP);
-    this.library = discogs;
-    /*discogs.libraryObs.subscribe(
+  constructor(public discogs: DiscogsApi, private router: Router, private activatedRoute: ActivatedRoute){
+    activatedRoute.params.subscribe((params: Params) => {
+      if(params['p'] && params['pp']) {
+        let qPage = params['p'];
+        let qPerPage = params['pp'];
+        this.model.pP = qPerPage;
+        this.discogs.loadDisco(qPage, qPerPage);
+      } else {
+        this.model.pP = this.choice[0];
+        discogs.loadDisco(1, this.model.pP);
+      }
+    });
+    //this.library = discogs;
+    discogs.libraryObs.subscribe(
       (data) => {
         this.library = data;
-        this.pages = this.library.releases.pagination.pages;
+        //this.pages = this.library.releases.pagination.pages;
       }
-    );*/
+    );
   }
 
-  ngOnInit() { }
+  ngOnInit() {  }
 
   getDetail(id){
     this.router.navigate(['./rel/'+id]);

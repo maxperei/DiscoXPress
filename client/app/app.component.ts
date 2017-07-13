@@ -12,10 +12,8 @@ export class App {
   constructor() {
 
     this.pages = [
-      {title: 'Home', link: '/'},
+      {title: 'Shop', link: '/'},
       {title: 'Collection', link: '/collection'},
-      {title: 'Wantlist', link: '/wantlist'},
-      {title: 'Identity', link: '/identity'},
       {title: 'Settings', link: '/settings'},
     ];
   }

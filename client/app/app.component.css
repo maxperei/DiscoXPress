@@ -17,7 +17,7 @@ header.header{
 }
 .header nav .nav__content{
     position: relative;
-    width: 260px;
+    width: 174px;
     height: 100%;
     letter-spacing: 0.075em;
 }
@@ -30,6 +30,37 @@ header.header{
     font-size: 1rem;
     font-weight: bold;
 }
+
+.header nav .nav__content .logo {
+    font-size: 2em;
+}
+
+.header nav .nav__content .logo a {
+    text-decoration: none;
+}
+
+.header nav .nav__content .logo a:hover,
+.header nav .nav__content .logo a:focus {
+    text-decoration: underline;
+}
+
+.header nav .nav__content .logo .ico__img,
+.header nav .nav__content .logo .ico__txt {
+    display: block;
+    text-align: center;
+}
+
+.header nav .nav__content .logo .ico__img {
+    padding: 0 15px;
+}
+
+.header nav .nav__content .logo .ico__txt {
+    color: #fff;
+    position: relative;
+    bottom: 15px;
+    left: 25px;
+}
+
 main{
     margin-left: 174px;
     min-height: 100%;

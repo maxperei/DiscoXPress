@@ -13,6 +13,7 @@ import { routing } from './app.routes';
 import { RootPage } from '../pages/root-page/root-page.component';
 import { ReleaseDetail } from "../pages/release/release-detail.component";
 import { SafePipe } from '../pipes/safe.pipe';
+import { LoginComponent } from '../pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SafePipe } from '../pipes/safe.pipe';
     Profile,
     RootPage,
     ReleaseDetail,
-    SafePipe
+    SafePipe,
+    LoginComponent
   ],
   imports: [
     routing,

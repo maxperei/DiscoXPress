@@ -6,6 +6,7 @@ import { collectionRoutes } from '../pages/collection/collection.routes';
 import { identityRoutes } from "../pages/identity/identity.routes";
 import { profileRoutes } from "../pages/profile/profile.routes";
 import { pageNotFoundRoutes } from "../pages/page-not-found/page-not-found.routes";
+import { loginRoutes } from "../pages/login/login.routes";
 
 export const routes: Routes = [
     {
@@ -13,6 +14,7 @@ export const routes: Routes = [
         redirectTo: '/',
         pathMatch: 'full'
     },
+    ...loginRoutes,
     ...rootRoutes,
     ...collectionRoutes,
     ...identityRoutes,

@@ -10,17 +10,26 @@ import { isUndefined } from 'util';
 })
 export class RootPage implements OnInit {
   public inventory;
+  public message;
+  public listings: Array<any> = [];
   pages: any;
   model = { pP: null };
   choice: number[] = [50, 75, 100];
   constructor(public discogs: DiscogsApi, public router: Router) {
+
     this.model.pP = this.choice[1];
     discogs.ownerInventory(1, this.model.pP);
     discogs.invObs.subscribe(
-        (data) => {
-          this.inventory = JSON.parse(window.localStorage['inv']);
+      (data) => {
+        this.inventory = JSON.parse(window.localStorage['inv']);
+        this.message = this.inventory.inventory.message;
+        this.listings = this.inventory.inventory.listings;
+        if(this.message != 'Missing user-agent'){
           this.pages = this.inventory.inventory.pagination.pages;
+        } else {
+          router.navigate(['./login'])
         }
+      }
     );
   }
 

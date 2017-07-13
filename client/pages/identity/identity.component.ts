@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DiscogsApi } from "../../services/discogs-api";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-identity',
@@ -8,13 +9,16 @@ import { DiscogsApi } from "../../services/discogs-api";
 })
 export class Identity implements OnInit {
   public identity;
+  public message;
 
-  constructor(public discogs: DiscogsApi) {
+  constructor(public discogs: DiscogsApi, public router: Router) {
     discogs.loadIdentity();
-    discogs.identityObs.subscribe(data => this.identity = JSON.parse(window.localStorage['identity']));
+    discogs.identityObs.subscribe(
+        (data) => {
+          this.identity = JSON.parse(window.localStorage['identity']);
+        }
+    );
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }
