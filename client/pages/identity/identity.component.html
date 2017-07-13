@@ -1,6 +1,9 @@
-<h2>
-  <strong>{{ discogs.identity.title }}</strong>
+<h2 *ngIf="discogs.identity.title">
+  <strong><a *ngIf="discogs.identity.session.resource_url" href="{{ discogs.identity.session.resource_url }}">{{ discogs.identity.session.username }}</a></strong>
 </h2>
-<p>
-  <em>Author</em> : @{{ discogs.identity.author }}
+<p *ngIf="discogs.identity.session">
+  <em>Id</em> : {{ discogs.identity.session.id }}
 </p>
+<span *ngIf="discogs.identity.author">
+  <em>Author</em> : @<a href="https://twitter.com/max_perei" target="_blank">{{ discogs.identity.author }}</a>
+</span>
