@@ -3,27 +3,27 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { App } from './app.component';
+import { AppComponent } from './app.component';
 import { DiscogsApi } from '../services/discogs-api';
-import { Collection } from '../pages/collection/collection.component';
-import { Identity } from '../pages/identity/identity.component';
-import { PageNotFound } from '../pages/page-not-found/page-not-found.component';
-import { Profile } from '../pages/profile/profile.component'
+import { CollectionComponent } from '../pages/collection/collection.component';
+import { IdentityComponent } from '../pages/identity/identity.component';
+import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';
+import { ProfileComponent } from '../pages/profile/profile.component';
 import { routing } from './app.routes';
-import { RootPage } from '../pages/root-page/root-page.component';
-import { ReleaseDetail } from "../pages/release/release-detail.component";
+import { RootPageComponent } from '../pages/root-page/root-page.component';
+import { ReleaseDetailComponent } from '../pages/release/release-detail.component';
 import { SafePipe } from '../pipes/safe.pipe';
 import { LoginComponent } from '../pages/login/login.component';
 
 @NgModule({
   declarations: [
-    App,
-    Collection,
-    Identity,
-    PageNotFound,
-    Profile,
-    RootPage,
-    ReleaseDetail,
+    AppComponent,
+    CollectionComponent,
+    IdentityComponent,
+    PageNotFoundComponent,
+    ProfileComponent,
+    RootPageComponent,
+    ReleaseDetailComponent,
     SafePipe,
     LoginComponent
   ],
@@ -36,6 +36,6 @@ import { LoginComponent } from '../pages/login/login.component';
   providers: [
     DiscogsApi
   ],
-  bootstrap: [App]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

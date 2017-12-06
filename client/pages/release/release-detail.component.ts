@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscogsApi } from "../../services/discogs-api";
+import { DiscogsApi } from '../../services/discogs-api';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./release-detail.component.css']
 })
 
-export class ReleaseDetail implements OnInit {
+export class ReleaseDetailComponent implements OnInit {
   private sub: any;
   private call: any;
   ref: any;
