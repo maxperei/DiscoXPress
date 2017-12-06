@@ -3,17 +3,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { DiscogsApi } from '../../services/discogs-api';
 import { apiBase } from '../../../server/config';
-import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.css']
 })
-export class Collection implements OnInit {
+export class CollectionComponent implements OnInit {
 
   public library;
-  private authorize: string = apiBase+'/authorize';
+  private authorize: string = apiBase + '/authorize';
   pages: any;
   model = { pP: null };
   choice: number[] = [50, 75, 100];
@@ -29,7 +28,7 @@ export class Collection implements OnInit {
         discogs.loadDisco(1, this.model.pP);
       }
     });
-    //this.library = discogs;
+    // this.library = discogs;
     discogs.libraryObs.subscribe(
       (data) => {
         this.library = data;
@@ -39,29 +38,27 @@ export class Collection implements OnInit {
         } else {
 
         }
-        //this.pages = this.library.releases.pagination.pages;
+        // this.pages = this.library.releases.pagination.pages;
       }
     );
   }
 
   ngOnInit() {  }
 
-  getDetail(id){
-    this.router.navigate(['./rel/'+id]);
+  getDetail(id) {
+    this.router.navigate(['./rel/' + id]);
   }
 
-  createRange(number){
+  createRange(number) {
     let items: number[] = [];
-    for(let i = 1; i <= number; i++){
+    for (let i = 1; i <= number; i++) {
       items.push(i);
     }
     return items;
   }
 
-  pagination(p, pP){
-    if(isUndefined(pP)){
-      pP = this.model.pP;
-    }
+  pagination(p, pP) {
+    pP = this.model.pP;
     this.discogs.loadDisco(p, pP);
     this.router.navigate([`./collection/${p}/${pP}`]);
   }

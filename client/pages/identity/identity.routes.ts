@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { Identity } from './identity.component';
+import { IdentityComponent } from './identity.component';
 
 export const identityRoutes: Routes = [
-    { path: 'identity', component: Identity },
+    { path: 'identity', component: IdentityComponent },
 ];

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
     </p>
   `
 })
-export class PageNotFound implements OnInit {
+export class PageNotFoundComponent implements OnInit {
 
   constructor() { }
 

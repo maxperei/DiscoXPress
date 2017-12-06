@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscogsApi } from "../../services/discogs-api";
+import { DiscogsApi } from '../../services/discogs-api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './identity.component.html',
   styleUrls: ['./identity.component.css']
 })
-export class Identity implements OnInit {
+export class IdentityComponent implements OnInit {
   public identity;
   public message;
 
