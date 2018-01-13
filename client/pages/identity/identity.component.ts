@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './identity.component.html',
   styleUrls: ['./identity.component.css']
 })
-export class Identity implements OnInit {
+export class IdentityComponent implements OnInit {
   public identity;
   public profile;
   public avatar: string;

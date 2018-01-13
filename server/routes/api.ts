@@ -1,6 +1,6 @@
 import { Router, Response, Request, NextFunction } from 'express';
 const discogs = require('disconnect');
-import {apiBase, headers, token, key, username} from "../config";
+import {apiBase, headers, token, key, username} from '../config';
 const session = require('express-session');
 
 const apiRouter: Router = Router();
@@ -27,7 +27,7 @@ apiRouter.get('/authorize', function(request: Request, response: Response) {
   oAuth.getRequestToken(
     'tKJDUtRDoJpIDNsIQHCm',
     'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW',
-    apiBase+'/callback',
+    apiBase + '/callback',
     function(err, requestData){
       sess = session;
       sess.dataRequested = requestData;
@@ -49,13 +49,13 @@ apiRouter.get('/callback', function(request: Request, response: Response) {
 });
 
 apiRouter.get('/identity', function(request: Request, response: Response) {
-  const dis = new Discogs(sess.dataAccessed);
-  dis.getIdentity(function(err, data){
+  const disc = new Discogs(sess.dataAccessed);
+  disc.getIdentity(function(err, data){
     if (data) {
       sess.identity = data;
       sess.username = data.username;
       response.jsonp({
-        title: sess.username+'\'s Identity',
+        title: sess.username + '\'s Identity',
         author: 'maxperei',
         session: sess.identity
       });
@@ -94,7 +94,7 @@ apiRouter.get('/owner/:page/:per_page', function(request: Request, response: Res
     } else {
       response.jsonp({
         message: 'Missing user-agent.'
-      })
+      });
     }
   });
 });
@@ -117,7 +117,7 @@ apiRouter.get('/:page/:per_page', function(request: Request, response: Response)
     let col = new Discogs(sess.dataAccessed).user().collection();
     col.getReleases(sess.username, 0, {page: page, per_page: per_page}, function(err, data){
       response.jsonp({
-        title: 'Welcome to '+sess.username+'\'s Collection',
+        title: 'Welcome to ' + sess.username + '\'s Collection',
         author: 'maxperei',
         releases: data
       });

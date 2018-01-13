@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscogsApi } from "../../services/discogs-api";
+import { DiscogsApi } from '../../services/discogs-api';
 import { Router } from '@angular/router';
-import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-root-page',
   templateUrl: './root-page.component.html',
   styleUrls: ['./root-page.component.css']
 })
-export class RootPage implements OnInit {
+export class RootPageComponent implements OnInit {
   public inventory;
   public message;
   public listings: Array<any> = [];
@@ -23,7 +22,7 @@ export class RootPage implements OnInit {
         this.inventory = JSON.parse(window.localStorage['inv']);
         this.message = this.inventory.message;
         if(this.message){
-          router.navigate(['./login'])
+          router.navigate(['./login']);
         } else {
           this.listings = this.inventory.listings;
           this.pages = this.inventory.pagination.pages;
@@ -44,9 +43,7 @@ export class RootPage implements OnInit {
   }
 
   pagination(p, pP){
-    if(isUndefined(pP)){
-      pP = this.model.pP;
-    }
+    pP = this.model.pP;
     this.discogs.ownerInventory(p, pP);
   }
 
