@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DiscogsApi } from '../../services/discogs-api';
 import { apiBase } from '../../../server/config';
 import { isUndefined } from 'util';
+import {cache} from "rxjs/operator/cache";
 
 @Component({
   selector: 'app-collection',

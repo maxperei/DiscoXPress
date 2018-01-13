@@ -1,9 +1,15 @@
-<h2 *ngIf="discogs.identity.title">
-  <strong><a *ngIf="discogs.identity.session.resource_url" href="{{ discogs.identity.session.resource_url }}">{{ discogs.identity.session.username }}</a></strong>
-</h2>
-<p *ngIf="discogs.identity.session">
-  <em>Id</em> : {{ discogs.identity.session.id }}
-</p>
-<span *ngIf="discogs.identity.author">
-  <em>Author</em> : @<a href="https://twitter.com/max_perei" target="_blank">{{ discogs.identity.author }}</a>
-</span>
+<div *ngIf="profile" class="user">
+  <section class="img__wrapper">
+    <!--<img src="{{ avatar }}" />-->
+    <div [ngStyle]="{ 'background': avatar_url }"></div>
+  </section>
+  <section class="txt__wrapper">
+    <h2><strong>{{ username }}</strong> {{ name }}</h2>
+    <p *ngIf="discogs.identity.session">
+      <em>Id</em> : {{ discogs.identity.session.id }}
+    </p>
+  </section>
+  <span *ngIf="discogs.identity.author">
+      <em>Author</em> : @<a href="https://twitter.com/max_perei" target="_blank">{{ discogs.identity.author }}</a>
+    </span>
+</div>
