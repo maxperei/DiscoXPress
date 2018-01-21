@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { isUndefined } from 'util';
-import { cache } from "rxjs/operator/cache";
+import { DiscogsApi } from '../../services/discogs-api';
+import { apiBase } from '../../../server/config';
 
 @Component({
   selector: 'app-collection',
