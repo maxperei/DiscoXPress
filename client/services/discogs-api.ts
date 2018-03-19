@@ -36,8 +36,9 @@ export class DiscogsApi {
       this.http.get(apiBase + `/${page}/${per_page}`).map(res => res.json()).subscribe(
         (data) => {
           this.library = data;
-          if (!this.cacheCol[page]) { this.cacheCol[page]= [] }
+          if (!this.cacheCol[page]) { this.cacheCol[page] = [] }
           this.cacheCol[page][per_page] = data;
+          console.log(this.cacheCol);
           this.libraryObs.next(data);
         }
       );

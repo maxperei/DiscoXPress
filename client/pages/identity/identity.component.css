@@ -1,0 +1,10 @@
+section.img__wrapper > div {
+    width: 500px;
+    height: 500px;
+    background-size: cover;
+}
+section.img__wrapper,
+section.txt__wrapper {
+    width: 50%;
+    float: left;
+}
