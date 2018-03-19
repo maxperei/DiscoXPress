@@ -13,7 +13,6 @@ header.header{
     background: #111;
     z-index: 10;
     overflow: hidden;
-    cursor: pointer;
 }
 .header nav .nav__content{
     position: relative;
@@ -22,15 +21,17 @@ header.header{
     letter-spacing: 0.075em;
 }
 .header nav .nav__content .nav__pages{
-    position: absolute;
+    position: relative;
     left: 0;
-    top: 50%;
+    top: 50vh;
     width: 100%;
-    margin-top: -98px;
+    margin-top: -138px;
     font-size: 1rem;
     font-weight: bold;
 }
-
+.header nav .nav__content .nav__pages ul li a{
+    color: white;
+}
 .header nav .nav__content .logo {
     font-size: 2em;
 }

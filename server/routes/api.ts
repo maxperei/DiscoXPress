@@ -70,7 +70,7 @@ apiRouter.get('/identity', function(request: Request, response: Response) {
 
 apiRouter.get('/profile', function (request: Request, response: Response) {
   let usr = new Discogs(sess.dataAccessed).user();
-  usr.getProfile(sess.username, function(err, data){
+  usr.getProfile(sess.username, function(err, data) {
     response.jsonp(data);
   });
 });
@@ -78,7 +78,7 @@ apiRouter.get('/profile', function (request: Request, response: Response) {
 apiRouter.get('/cougouyou/:page/:per_page', function(request: Request, response: Response) {
   let page = request.params.page, per_page = request.params.per_page;
   let inv = new Discogs(sess.dataAccessed).marketplace();
-  inv.getInventory('cougouyou_music', { page: page, per_page: per_page}, function(err, data){
+  inv.getInventory('cougouyou_music', { page: page, per_page: per_page }, function(err, data) {
     response.jsonp({
       inventory: data
     });
@@ -88,7 +88,7 @@ apiRouter.get('/cougouyou/:page/:per_page', function(request: Request, response:
 apiRouter.get('/owner/:page/:per_page', function(request: Request, response: Response) {
   let page = request.params.page, per_page = request.params.per_page;
   let inv = new Discogs(sess.dataAccessed).marketplace();
-  inv.getInventory(sess.username, { page: page, per_page: per_page}, function(err, data){
+  inv.getInventory(sess.username, { page: page, per_page: per_page }, function(err, data) {
     if (data) {
       response.jsonp(data);
     } else {
@@ -115,7 +115,7 @@ apiRouter.get('/:page/:per_page', function(request: Request, response: Response)
   } else {
     let page = request.params.page, per_page = request.params.per_page;
     let col = new Discogs(sess.dataAccessed).user().collection();
-    col.getReleases(sess.username, 0, {page: page, per_page: per_page}, function(err, data){
+    col.getReleases(sess.username, 0, { page: page, per_page: per_page }, function(err, data) {
       response.jsonp({
         title: 'Welcome to ' + sess.username + '\'s Collection',
         author: 'maxperei',

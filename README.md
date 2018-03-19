@@ -5,7 +5,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 Edit: This project is now stable with [angular-cli](https://github.com/angular/angular-cli) version 1.5.5
 
 ## Launch
-First of all, run ` npm install`.
+First of all, run `npm install`.
 
 Then, run `npm run start`. 
 

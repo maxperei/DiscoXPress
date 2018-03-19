@@ -9,7 +9,7 @@
       </h1>
       <ul class="nav__pages">
         <li *ngFor="let p of pages">
-          <a routerLink="{{ p.link }}">{{ p.title }}</a>
+          <a routerLink="{{ p.link }}" routerLinkActive="active">{{ p.title }}</a>
         </li>
       </ul>
     </div>
