@@ -51,6 +51,7 @@ app-collection section{
 }
 .img__wrapper{
     width: 150px;
+    margin: auto;
     display: block;
     overflow: hidden;
     position: relative;

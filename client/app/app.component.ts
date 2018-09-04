@@ -10,7 +10,6 @@ export class AppComponent {
   pages: Array<{title: string, link: string}>;
 
   constructor() {
-
     this.pages = [
       {title: 'Shop', link: '/'},
       {title: 'Collection', link: '/collection'},
