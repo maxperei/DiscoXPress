@@ -29,9 +29,13 @@ apiRouter.get('/authorize', function(request: Request, response: Response) {
     'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW',
     apiBase + '/callback',
     function(err, requestData){
-      sess = session;
-      sess.dataRequested = requestData;
-      response.redirect(requestData.authorizeUrl);
+      if (err) {
+        response.jsonp(err);
+      } else {
+        sess = session;
+        sess.dataRequested = requestData;
+        response.redirect(requestData.authorizeUrl);
+      }
     }
   );
 });
@@ -41,9 +45,13 @@ apiRouter.get('/callback', function(request: Request, response: Response) {
   oAuth.getAccessToken(
     request.query.oauth_verifier,
     function(err, accessData){
-      sess = session;
-      sess.dataAccessed = accessData;
-      response.redirect('http://localhost:4200/identity');
+      if (err) {
+        response.jsonp(err);
+      } else {
+        sess = session;
+        sess.dataAccessed = accessData;
+        response.redirect('http://localhost:4200/identity');
+      }
     }
   );
 });
@@ -71,7 +79,11 @@ apiRouter.get('/identity', function(request: Request, response: Response) {
 apiRouter.get('/profile', function (request: Request, response: Response) {
   let usr = new Discogs(sess.dataAccessed).user();
   usr.getProfile(sess.username, function(err, data){
-    response.jsonp(data);
+    if (err) {
+      response.json(err);
+    } else {
+      response.jsonp(data);
+    }
   });
 });
 
