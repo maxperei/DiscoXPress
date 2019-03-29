@@ -14,6 +14,7 @@ export class RootPageComponent implements OnInit {
   pages: any;
   model = { pP: null };
   choice: number[] = [50, 75, 100];
+
   constructor(public discogs: DiscogsApi, public router: Router) {
     this.model.pP = this.choice[1];
     discogs.ownerInventory(1, this.model.pP);

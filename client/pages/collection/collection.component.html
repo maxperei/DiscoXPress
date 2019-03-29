@@ -4,7 +4,7 @@
 <div *ngIf="library">
   <div class="pagination">
     <ul class="pages">
-      <li *ngFor="let p of createRange(discogs.library.releases.pagination.pages)" (click)="pagination(p, pP)">
+      <li *ngFor="let p of createRange(discogs.library.releases.pagination.pages)" (click)="pagination(p, model.pP)">
         {{ p }}
       </li>
     </ul>

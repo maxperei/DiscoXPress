@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DiscogsApi {
   data: any;
-  library: Object = { 'releases': { 'releases': [], 'pagination': { 'pages' : 0 } } };
+  public library: Object = { 'releases': { 'releases': [], 'pagination': { 'pages' : 0 } } };
   identity: Object = {};
   release: Object = {};
   inventory: Object = {};
@@ -24,25 +24,20 @@ export class DiscogsApi {
   }
 
   loadDisco(page, per_page) {
-    /*if (this.isInColCache(page, per_page)) {
+    if (this.isInColCache(page, per_page)) {
       this.library = this.cacheCol[page][per_page];
-      console.log('in cache');
-      this.libraryObs.subscribe(
-          (data) => {
-            this.libraryObs.next(data);
-          }
-      )
-    } else {*/
+    } else {
       this.http.get(apiBase + `/${page}/${per_page}`).map(res => res.json()).subscribe(
         (data) => {
           this.library = data;
-          if (!this.cacheCol[page]) { this.cacheCol[page] = [] }
-          this.cacheCol[page][per_page] = data;
-          console.log(this.cacheCol);
+          if (!this.cacheCol[page]) {
+            this.cacheCol[page] = []
+          }
+          this.cacheCol[page][per_page] = this.library;
           this.libraryObs.next(data);
         }
       );
-    /*}*/
+    }
   }
 
   loadIdentity(){
@@ -65,18 +60,8 @@ export class DiscogsApi {
     )
   }
 
-  cougouyouInventory(page, per_page){
-    this.http.get(apiBase+`/cougouyou/${page}/${per_page}`).map(res => res.json()).subscribe(
-      (data) => {
-        this.inventory = data;
-        window.localStorage['inv'] = JSON.stringify(this.inventory);
-        this.invObs.next(data);
-      }
-    )
-  }
-
   isInColCache(p, pP){
-    return this.cacheCol[p] != undefined ? this.cacheCol[p][pP] != undefined : false ;
+    return this.cacheCol[p] != undefined ? this.cacheCol[p][pP] != undefined : false;
   }
 
   isInCache(id){
@@ -85,7 +70,7 @@ export class DiscogsApi {
 
   findRelById(id){
     if (this.isInCache(id)) {
-      this.releaseObs.next(this.cache[id]);
+      this.release = this.cache[id];
     } else {
       this.http.get(apiBase+'/releases/'+id).map(res => res.json()).subscribe(
         (data) => {

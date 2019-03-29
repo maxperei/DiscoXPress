@@ -1,4 +1,7 @@
-<main>
+<main *ngIf="!ref">
+  <div [class.loader]="!isLoaded"></div>
+</main>
+<main *ngIf="ref">
     <div *ngFor="let imgPpty of artw">
         <img [src]="imgPpty.uri" [width]="imgPpty.width" [height]="imgPpty.height" />
     </div>
