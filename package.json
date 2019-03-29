@@ -9,7 +9,8 @@
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "build": "ng build --prod --output-path=dist/client && npm run _server:build",
-    "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/bin/www.js\" ",
+    "_client:run": "ng serve --proxy-config proxy.conf.json",
+    "_server:run": "npm run _server:build && nodemon dist/server/bin/www.js",
     "_server:build": "tsc -p ./server",
     "postinstall": "npm run build"
   },

@@ -1,33 +1,32 @@
 import { Router, Response, Request, NextFunction } from 'express';
+import * as conf from '../config';
+import * as fs from 'fs';
+import * as path from 'path';
+
 const discogs = require('disconnect');
-import {apiBase, headers, token, key, username} from '../config';
 const session = require('express-session');
 
 const apiRouter: Router = Router();
 const Discogs = discogs.Client;
 
 const dis = new Discogs(
-  headers.userAgent,
-  { consumerKey: key.consumerKey },
-  { consumerSecret: key.consumerSecret }
+  conf.headers.userAgent,
+  { consumerKey: conf.keys.consumerKey },
+  { consumerSecret: conf.keys.consumerSecret }
 );
 
-let sess = { dataAccessed: '', dataRequested: '', username: '', identity: ''};
+let sess = { dataAccessed: '', dataRequested: '', username: '', identity: '' };
 
-apiRouter.get('/releases/:id', function(request: Request, response: Response, next: NextFunction) {
-  let id = request.params.id;
-  let db = new Discogs(sess.dataAccessed).database();
-  db.getRelease(id, function(err, data){
-    response.jsonp(data);
-  });
-});
+let auth = conf.hasOwnProperty('accessData') ? sess.dataAccessed || conf['accessData'] : '';
 
-apiRouter.get('/authorize', function(request: Request, response: Response) {
+let username = sess.username || conf.username;
+
+apiRouter.get('/authorize', (request: Request, response: Response) => {
   const oAuth = new Discogs().oauth();
   oAuth.getRequestToken(
-    'tKJDUtRDoJpIDNsIQHCm',
-    'CiHUbhnJpOqdMUeERvsFZBYNpKawZwlW',
-    apiBase + '/callback',
+    conf.keys.consumerKey,
+    conf.keys.consumerSecret,
+    conf.apiBase + '/callback',
     function(err, requestData){
       if (err) {
         response.jsonp(err);
@@ -40,7 +39,7 @@ apiRouter.get('/authorize', function(request: Request, response: Response) {
   );
 });
 
-apiRouter.get('/callback', function(request: Request, response: Response) {
+apiRouter.get('/callback', (request: Request, response: Response) => {
   const oAuth = new Discogs(sess.dataRequested).oauth();
   oAuth.getAccessToken(
     request.query.oauth_verifier,
@@ -50,6 +49,18 @@ apiRouter.get('/callback', function(request: Request, response: Response) {
       } else {
         sess = session;
         sess.dataAccessed = accessData;
+
+        let data =
+            "\n" +
+            "export const accessData = " + JSON.stringify(accessData) +
+            ";\r\n";
+
+        try {
+          fs.appendFileSync(path.resolve('server/config.ts'), data);
+        } catch (err) {
+          console.log(err);
+        }
+
         response.redirect('http://localhost:4200/identity');
       }
     }
@@ -57,15 +68,14 @@ apiRouter.get('/callback', function(request: Request, response: Response) {
 });
 
 apiRouter.get('/identity', function(request: Request, response: Response) {
-  const disc = new Discogs(sess.dataAccessed);
+  let identity = sess.dataAccessed || conf[''];
+  const disc = new Discogs(identity);
   disc.getIdentity(function(err, data){
     if (data) {
-      sess.identity = data;
-      sess.username = data.username;
       response.jsonp({
-        title: sess.username + '\'s Identity',
+        title: username + '\'s Identity',
         author: 'maxperei',
-        session: sess.identity
+        session: data
       });
     } else {
       response.jsonp({
@@ -77,8 +87,8 @@ apiRouter.get('/identity', function(request: Request, response: Response) {
 });
 
 apiRouter.get('/profile', function (request: Request, response: Response) {
-  let usr = new Discogs(sess.dataAccessed).user();
-  usr.getProfile(sess.username, function(err, data){
+  let usr = new Discogs(auth).user();
+  usr.getProfile(username, function(err, data){
     if (err) {
       response.json(err);
     } else {
@@ -87,21 +97,12 @@ apiRouter.get('/profile', function (request: Request, response: Response) {
   });
 });
 
-apiRouter.get('/cougouyou/:page/:per_page', function(request: Request, response: Response) {
+apiRouter.get('/owner/:page/:per_page', (request: Request, response: Response) => {
   let page = request.params.page, per_page = request.params.per_page;
-  let inv = new Discogs(sess.dataAccessed).marketplace();
-  inv.getInventory('cougouyou_music', { page: page, per_page: per_page}, function(err, data){
-    response.jsonp({
-      inventory: data
-    });
-  });
-});
+  let inv = new Discogs(auth).marketplace();
 
-apiRouter.get('/owner/:page/:per_page', function(request: Request, response: Response) {
-  let page = request.params.page, per_page = request.params.per_page;
-  let inv = new Discogs(sess.dataAccessed).marketplace();
-  inv.getInventory(sess.username, { page: page, per_page: per_page}, function(err, data){
-    if (data) {
+  inv.getInventory(username, { page: page, per_page: per_page }, (err, data) => {
+    if (auth) { // || data
       response.jsonp(data);
     } else {
       response.jsonp({
@@ -111,26 +112,33 @@ apiRouter.get('/owner/:page/:per_page', function(request: Request, response: Res
   });
 });
 
-apiRouter.get('/release', function(request: Request, response: Response) {
+apiRouter.get('/releases/:id', (request: Request, response: Response, next: NextFunction) => {
+  let id = request.params.id;
+  let db = new Discogs(auth).database();
+  db.getRelease(id, (err, data) => {
+    response.jsonp(data);
+  });
+});
+
+apiRouter.get('/release', (request: Request, response: Response) => {
   let id = 7017407;
   let db = new Discogs().database();
-  db.getRelease(id, function(err, data){
+  db.getRelease(id, (err, data) => {
     response.send(data);
   });
 });
 
-apiRouter.get('/:page/:per_page', function(request: Request, response: Response) {
-  if (!sess.dataAccessed) {
+apiRouter.get('/:page/:per_page', (request: Request, response: Response) => {
+  if (!auth) {
     response.jsonp({
       message: 'You must authenticate to access this resource.'
     });
   } else {
     let page = request.params.page, per_page = request.params.per_page;
-    let col = new Discogs(sess.dataAccessed).user().collection();
-    col.getReleases(sess.username, 0, {page: page, per_page: per_page}, function(err, data){
+    let col = new Discogs(auth).user().collection();
+
+    col.getReleases(username, 0, { page: page, per_page: per_page }, (err, data) => {
       response.jsonp({
-        title: 'Welcome to ' + sess.username + '\'s Collection',
-        author: 'maxperei',
         releases: data
       });
     });
